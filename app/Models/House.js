@@ -25,9 +25,14 @@ export default class House {
       <p class="card-text">${this.description} <b>$${
       this.price
       }</b></p>
+      <p> bathrooms: ${this.bathrooms}</p>
+      <p> levels: ${this.levels}</p>
+      <p> bedrooms: ${this.bedrooms}</p>
+      <p> year: ${this.year}</p>
+
       <button class="btn btn-info" onclick="app.housesController.bid('${
       this._id
-      }', ${this.price + 5})">BID $5</button>
+      }', ${this.price + 5})">BID $500</button>
       <button class="btn btn-danger" onclick="app.housesController.delete('${
       this._id
       }')">DELETE</button>

@@ -27,36 +27,37 @@ export default class HouseController {
   getAllHouses() {
     HousesService.getHouses();
   }
-
-  addCar(event) {
+  deleteHouse(id) {
+    HousesService.deleteHouse(id)
+  }
+  addHouse(event) {
     event.preventDefault();
 
     // NOTE formData is an alias for our submitted form from our html
     let formData = event.target;
     // NOTE newcar is an object with all the inputted values from our form
     let newHouse = {
-      make: formData.make.value,
-      model: formData.model.value,
+      bedrooms: formData.bedrooms.value,
+      bathrooms: formData.bathrooms.value,
+      levels: formData.levels.value,
       year: formData.year.value,
       price: formData.price.value,
       imgUrl: formData.imgUrl.value,
       description: formData.description.value
     };
     console.log(newHouse);
-    HousesService.addHouse(newHOuse);
+    HousesService.addHouse(newHouse);
     formData.reset();
     // @ts-ignore
-    $("#car-form").modal("toggle");
+    $("#house-form").modal("toggle");
   }
 
   bid(id, price) {
-    debugger;
     HousesService.editHouse(id, { price });
   }
 
   removeImg(id) {
-    debugger;
-    HousesService.editHouse(id, { imgUrl: "//placehold.it/200x200" });
+    HousesService.editHouse(id, { imgUrl: "" });
   }
 
   delete(id) {
