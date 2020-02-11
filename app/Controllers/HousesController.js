@@ -1,31 +1,31 @@
-import CarsService from "../Services/CarsService.js";
+import HousesService from "../Services/HousesService.js";
 import store from "../store.js";
 
 //Private
 function _draw() {
-  let cars = store.State.cars;
-  let carsElem = document.getElementById("target");
+  let houses = store.State.houses;
+  let housesElem = document.getElementById("target");
   let template = "";
 
-  cars.forEach(car => {
-    template += car.Template;
+  houses.forEach(house => {
+    template += house.Template;
   });
 
-  carsElem.innerHTML = template;
+  housesElem.innerHTML = template;
 }
 
 //Public
-export default class CarsController {
+export default class HouseController {
+  constructor() {
+    store.subscribe("houses", _draw);
+    HousesService.loadDataOnly()
+  }
   load() {
     _draw()
   }
-  constructor() {
-    store.subscribe("cars", _draw);
-    this.getAllCars();
-  }
 
-  getAllCars() {
-    CarsService.getCars();
+  getAllHouses() {
+    HousesService.getHouses();
   }
 
   addCar(event) {
@@ -34,7 +34,7 @@ export default class CarsController {
     // NOTE formData is an alias for our submitted form from our html
     let formData = event.target;
     // NOTE newcar is an object with all the inputted values from our form
-    let newCar = {
+    let newHouse = {
       make: formData.make.value,
       model: formData.model.value,
       year: formData.year.value,
@@ -42,22 +42,24 @@ export default class CarsController {
       imgUrl: formData.imgUrl.value,
       description: formData.description.value
     };
-    console.log(newCar);
-    CarsService.addCar(newCar);
+    console.log(newHouse);
+    HousesService.addHouse(newHOuse);
     formData.reset();
     // @ts-ignore
     $("#car-form").modal("toggle");
   }
 
   bid(id, price) {
-    CarsService.editCar(id, { price });
+    debugger;
+    HousesService.editHouse(id, { price });
   }
 
   removeImg(id) {
-    CarsService.editCar(id, { imgUrl: "//placehold.it/200x200" });
+    debugger;
+    HousesService.editHouse(id, { imgUrl: "//placehold.it/200x200" });
   }
 
   delete(id) {
-    CarsService.deleteCar(id);
+    HousesService.deleteHouse(id);
   }
 }
